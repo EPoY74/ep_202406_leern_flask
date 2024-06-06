@@ -6,7 +6,7 @@ p174@mail.ru
 Сайт урока: https://proglib.io/p/samouchitel-po-python-dlya-nachinayushchih-chast-23-osnovy-veb-razrabotki-na-flask-2023-06-27
 """
 
-from flask import Flask
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -23,7 +23,7 @@ def about():
     """
     Об авторе блок
     """
-    return 'Здесь будет информация об авторе сайта'   
+    return 'Здесь будет информация об авторе сайта'
 
 
 @app.route('/blog')
@@ -47,8 +47,20 @@ def user_id_profile(user_id):
     Принимает значение типа int
     """
     return f"Это профиль пользователя с ID {user_id}"
-    
+
+
+@app.route("/login", methods=['GET','POST'])
+def login():
+    """
+    Форма запроса пароля
+    """
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['password']
+        #Тут проверка логина и пароля
+        return f"Имя пользователя: {username}, пароль: {password}"
+    else:
+        return render_template('login.html')
 
 if __name__ == '__main__': # Проверяем, модуль или самостотельная программа
     app.run()  # Запускаю программу
-
