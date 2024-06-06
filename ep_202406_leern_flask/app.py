@@ -4,6 +4,7 @@ p174@mail.ru
 Дата: 06 июня 2024  года
 Цель: изучение фреймворка  Flask
 Сайт урока: https://proglib.io/p/samouchitel-po-python-dlya-nachinayushchih-chast-23-osnovy-veb-razrabotki-na-flask-2023-06-27
+дополнительная информация: https://habr.com/ru/articles/193260/
 """
 
 from flask import Flask, request, render_template
