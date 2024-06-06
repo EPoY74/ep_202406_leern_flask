@@ -40,6 +40,13 @@ def  user_profile(username):
     Использую переменые
     """
     return f"Это профиль пользователя {username}"
+
+@app.route("/user_id/<int:user_id>")
+def user_id_profile(user_id):
+    """
+    Принимает значение типа int
+    """
+    return f"Это профиль пользователя с ID {user_id}"
     
 
 if __name__ == '__main__': # Проверяем, модуль или самостотельная программа
