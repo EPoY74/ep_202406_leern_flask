@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="cpl-md-6">
+        <div class="card">
+            <div class="class-header">
+                <h1 class="text-center">Это главная страница"</h1> 
+            </div>
+            <div class="card_body">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div> 
+                    {% endif %}
+                {% endwith %}
+           
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

@@ -16,7 +16,8 @@ def home():  # Это будет отображаться
     """
     это стартовая страница
     """
-    return 'Это галвная страница'
+    # return 'Это галвная страница'
+    return render_template('main.html')
 
 
 @app.route ('/about')
@@ -24,7 +25,8 @@ def about():
     """
     Об авторе блок
     """
-    return 'Здесь будет информация об авторе сайта'
+    # return 'Здесь будет информация об авторе сайта'
+    return render_template("about.html")
 
 
 @app.route('/blog')
