@@ -9,15 +9,27 @@ p174@mail.ru
 
 from flask import Flask, request, render_template
 
+
 app = Flask(__name__)
+
+
+# Включаю автоматическую перезагрузку при изменении в коде
+# app.run(debug=True)
+# 20240613 не заработало: ответ сервера
+# Not Found
+# The requested URL was not found on the server.
+# If you entered the URL manually please check your spelling and try again.
+
+# TODO: Разобраться с включением режима отладки, чтобы при сохранении перезагружалось автоматически
+
 
 @app.route('/')  #Устанавливаем маршрут
 def home():  # Это будет отображаться
     """
     это стартовая страница
     """
-    # return 'Это галвная страница'
-    return render_template('main.html')
+    # return 'Это галвная страница'   # А тут вывводится просто строка
+    return render_template('main.html')  # Решил, что буду генерировать веб страницы, а не выводить строку в интерфейс
 
 
 @app.route ('/about')
@@ -66,4 +78,4 @@ def login():
         return render_template('login.html')
 
 if __name__ == '__main__': # Проверяем, модуль или самостотельная программа
-    app.run()  # Запускаю программу
+    app.run(debug=True)  # Запускаю программу
