@@ -11,17 +11,7 @@ from flask import Flask, request, render_template
 
 
 app = Flask(__name__)
-
-
-# Включаю автоматическую перезагрузку при изменении в коде
-# app.run(debug=True)
-# 20240613 не заработало: ответ сервера
-# Not Found
-# The requested URL was not found on the server.
-# If you entered the URL manually please check your spelling and try again.
-
-# TODO: Разобраться с включением режима отладки, чтобы при сохранении перезагружалось автоматически
-
+    
 
 @app.route('/')  #Устанавливаем маршрут
 def home():  # Это будет отображаться
