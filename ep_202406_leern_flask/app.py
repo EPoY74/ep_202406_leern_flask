@@ -8,11 +8,15 @@ p174@mail.ru
 """
 
 from flask import Flask, request, render_template
-
+from models import Artist, Album, Song, db
 
 app = Flask(__name__)
-    
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:зфыыцщкв@127.0.0.1:5432/music'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# Связываем приложение и экземпляр SQLAlchemy
+db.init_app(app)
+    
 @app.route('/')  #Устанавливаем маршрут
 def home():  # Это будет отображаться
     """
@@ -66,6 +70,16 @@ def login():
         return f"Имя пользователя: {username}, пароль: {password}"
     else:
         return render_template('login.html')
+
+
+@app.route("/songs")
+def Songs():
+    """
+    Выводит список песен из БД
+    """
+    song_list = Song.query.all()
+    return render_template('songs.html', songs = song_list)
+
 
 if __name__ == '__main__': # Проверяем, модуль или самостотельная программа
     app.run(debug=True)  # Запускаю программу
