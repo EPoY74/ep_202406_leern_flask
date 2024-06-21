@@ -31,14 +31,23 @@ def greeting():
     С 6:00 до 12:00 – «Доброе утро»; С 12:00 до 18:00 – «Добрый день»
     С 18:00 до 24:00 – «Добрый вечер»; С 00:00 до 6:00 – «Доброй ночи»
     """
-    time = datetime.datetime.strptime((datetime.datetime.now().strftime("%H:%M:%S")), "%H:%M:%S").time()
+    # time = datetime.datetime.strptime((datetime.datetime.now().strftime("%H:%M:%S")), "%H:%M:%S").time()
+    # # time = time1.strftime()
+    # if (str_to_time_conv("06:00:00") <= time < str_to_time_conv("12:00:00")): return "Доброе утро"
+    # if (str_to_time_conv("12:00:00") <= time < str_to_time_conv("18:00:00")): return "Добрый день"
+    # if (str_to_time_conv("18:00:00") <= time < str_to_time_conv("23:59:59")): return "Добрый вечер"
+    # if (str_to_time_conv("00:00:00") <= time < str_to_time_conv("06:00:00")): return "Доброй ночи"
+    # else: return str(str_to_time_conv("00:06:00")) #"Фигня какая-то"
+    # # return str(str_to_time_conv("06:00:00"))
+    
+    time = datetime.datetime.now().hour
     # time = time1.strftime()
-    if (str_to_time_conv("06:00:00") <= time < str_to_time_conv("12:00:00")): return "Доброе утро"
-    if (str_to_time_conv("12:00:00") <= time < str_to_time_conv("18:00:00")): return "Добрый день"
-    if (str_to_time_conv("18:00:00") <= time < str_to_time_conv("23:59:59")): return "Добрый вечер"
-    if (str_to_time_conv("00:00:00") <= time < str_to_time_conv("06:00:00")): return "Доброй ночи"
-    else: return str(str_to_time_conv("00:06:00")) #"Фигня какая-то"
-    # return str(str_to_time_conv("06:00:00"))
+    if 6 <= time < 12: times_greeting = "Доброе утро"
+    elif 12 <= time < 18: times_greeting = "Добрый день"
+    elif 18 <= time < 23: times_greeting = "Добрый вечер"
+    elif 23 <= time < 6: times_greeting = "Доброй ночи"
+    else: times_greeting = "Фигня какая-то "
+    return times_greeting
     
 if __name__=="__main__":
     print(greeting())
