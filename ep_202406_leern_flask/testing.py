@@ -88,47 +88,35 @@ def clear_func_args(site_responce):
     Args:
         responce (_type_): Ответ (часть, которая responce) сайта
     """
-    # for index_of_attribute, attribute in enumerate(site_responce, start = 1):
-    #     print(f"{index_of_attribute}: {attribute}")
     print_responce_attributs(site_responce)
     
     for index, attribute in enumerate (site_responce):
         if attribute.find("_") == 0:
             site_responce[index] = " "
     
-    # for index_of_attribute, attribute in enumerate(site_responce, start = 1):
-    #     print(f"{index_of_attribute}: {attribute}")
     print_responce_attributs(site_responce)
-    
     dividing_line_20() 
+
     #Используя list comprehension убираем заранее попеняные позиции (меняли ранее на пробелы)
     clear_list = [attribute for attribute in all_attributes if len(attribute) != 1 and attribute != " "]
         
     dividing_line_20()
     
-    # for index_of_attribute, attribute in enumerate(clear_list, start = 1):
-    #     print(f"{index_of_attribute}: {attribute}")
     print_responce_attributs(clear_list)  
-      
     dividing_line_20()
 
-    # #Выведите их на экран
-    # for index_of_atribute, attribute in enumerate(all_attributes, statr = 1):
-    #     # print(attribute + " "+ my_api_request().str(attribute))
-    #     if attribute.index("_"):
-    #         continue
-        
-    #     value = str(getattr(my_api_request, attribute))
-    # 
     
-    
-    def clear_private_argumenst(site_responce):
-        """Убирает приватные аргументы у возврещенного ответа с помощью list comprehension
+def clear_private_arguments(site_responce):
+    """Убирает приватные аргументы у возврещенного ответа с помощью list comprehension
 
-        Args:
-            site_responce (_type_): Ответ сайта , где необходимо вывести аргументы
-        """
-        
+    Args:
+        site_responce (_type_): Ответ сайта , где необходимо вывести аргументы
+    """
+    
+    clear_list = [attribute for attribute in site_responce if attribute[0] != "_"]
+    
+    return clear_list
+    
         
 if __name__=="__main__":
        # print(greeting())
@@ -148,5 +136,12 @@ if __name__=="__main__":
     
     print(type(all_attributes))
 
-    clear_func_args(all_attributes)    
-        
+    dividing_line_20()
+    
+    clear_responce = clear_private_arguments(all_attributes)
+    print_responce_attributs(clear_responce)
+    # clear_func_args(all_attributes)
+    
+    print(callable(site_responce.request.body))
+    
+            
