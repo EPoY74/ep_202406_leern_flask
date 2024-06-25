@@ -65,6 +65,12 @@ def my_api_request(my_api_sitename : str):
     return  responce_request
 
 
+def dividing_line_20():
+    """Выводит разделительную линию из 20 симфолов "-"
+    """
+    print(20*"-")  
+
+
 def clear_func_args(site_responce):
     """Поднотавлию данные для вывода только официально доступных полей
        и вывожу их в консоль, а може и буду позже просто возвращать
@@ -82,16 +88,16 @@ def clear_func_args(site_responce):
     for index_of_attribute, attribute in enumerate(site_responce, start = 1):
         print(f"{index_of_attribute}: {attribute}")
     
-    print(20*"_")   
+    dividing_line_20() 
     
     clear_list = [attribute for attribute in all_attributes if len(attribute) != 1 and attribute != " "]
         
-    print(20*"_")
+    dividing_line_20()
     
     for index_of_attribute, attribute in enumerate(clear_list, start = 1):
         print(f"{index_of_attribute}: {attribute}")
         
-    print(20*"_")
+    dividing_line_20()
 
     # #Выведите их на экран
     # for index_of_atribute, attribute in enumerate(all_attributes, statr = 1):
@@ -120,5 +126,5 @@ if __name__=="__main__":
     
     print(type(all_attributes))
 
-    #clear_func_args(all_attributes)    
+    clear_func_args(all_attributes)    
         
