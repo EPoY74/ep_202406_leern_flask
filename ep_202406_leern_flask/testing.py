@@ -66,37 +66,50 @@ def my_api_request(my_api_sitename : str):
 
 
 def dividing_line_20():
-    """Выводит разделительную линию из 20 симфолов "-"
+    """Выводит разделительную линию из 20 символов "-"
     """
     print(20*"-")  
-
-
-def clear_func_args(site_responce):
-    """Поднотавлию данные для вывода только официально доступных полей
-       и вывожу их в консоль, а може и буду позже просто возвращать
+    
+def print_responce_attributs(site_responce):
+    """Выводит на экран пронумерованый список  не приматных атрибутов у возвращенного запроса
 
     Args:
-        responce (_type_): _description_
+        site_responce (_type_):  Ответ сайта
     """
     for index_of_attribute, attribute in enumerate(site_responce, start = 1):
         print(f"{index_of_attribute}: {attribute}")
+    
+
+
+def clear_func_args(site_responce):
+    """Подготавлию данные для вывода только официально доступных полей
+       и вывожу их в консоль, а может и буду позже просто возвращать
+
+    Args:
+        responce (_type_): Ответ (часть, которая responce) сайта
+    """
+    # for index_of_attribute, attribute in enumerate(site_responce, start = 1):
+    #     print(f"{index_of_attribute}: {attribute}")
+    print_responce_attributs(site_responce)
     
     for index, attribute in enumerate (site_responce):
         if attribute.find("_") == 0:
             site_responce[index] = " "
     
-    for index_of_attribute, attribute in enumerate(site_responce, start = 1):
-        print(f"{index_of_attribute}: {attribute}")
+    # for index_of_attribute, attribute in enumerate(site_responce, start = 1):
+    #     print(f"{index_of_attribute}: {attribute}")
+    print_responce_attributs(site_responce)
     
     dividing_line_20() 
-    
+    #Используя list comprehension убираем заранее попеняные позиции (меняли ранее на пробелы)
     clear_list = [attribute for attribute in all_attributes if len(attribute) != 1 and attribute != " "]
         
     dividing_line_20()
     
-    for index_of_attribute, attribute in enumerate(clear_list, start = 1):
-        print(f"{index_of_attribute}: {attribute}")
-        
+    # for index_of_attribute, attribute in enumerate(clear_list, start = 1):
+    #     print(f"{index_of_attribute}: {attribute}")
+    print_responce_attributs(clear_list)  
+      
     dividing_line_20()
 
     # #Выведите их на экран
@@ -108,6 +121,15 @@ def clear_func_args(site_responce):
     #     value = str(getattr(my_api_request, attribute))
     # 
     
+    
+    def clear_private_argumenst(site_responce):
+        """Убирает приватные аргументы у возврещенного ответа с помощью list comprehension
+
+        Args:
+            site_responce (_type_): Ответ сайта , где необходимо вывести аргументы
+        """
+        
+        
 if __name__=="__main__":
        # print(greeting())
     APISITENAME : str= "https://randomuser.me/api/"
