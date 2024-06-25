@@ -54,33 +54,32 @@ def greeting():
     return times_greeting
     
 
-def my_api_request():
+def my_api_request(my_api_sitename : str):
 
     """Работаю и изучаю реквесты.
+    Функция  возвращает объект типа request, полученные от сайта 
        Сайт урока: https://proglib.io/p/python-i-api-prevoshodnoe-kombo-dlya-avtomatizacii-raboty-s-publichnymi-dannymi-2021-02-26
     """
-    responce_request = reqs.get("https://randomuser.me/api/")
+    responce_request = reqs.get(my_api_sitename)
     # responce_request = reqs.get("")
     return  responce_request
-    
-if __name__=="__main__":
-       # print(greeting())
-    print(my_api_request().text)
-    print(my_api_request().request.url)
-    
 
-    all_attributes = dir(my_api_request().request)
-    
-    print(type(all_attributes))
-    
-    for index_of_attribute, attribute in enumerate(all_attributes, start = 1):
+
+def clear_func_args(site_responce):
+    """Поднотавлию данные для вывода только официально доступных полей
+       и вывожу их в консоль, а може и буду позже просто возвращать
+
+    Args:
+        responce (_type_): _description_
+    """
+    for index_of_attribute, attribute in enumerate(site_responce, start = 1):
         print(f"{index_of_attribute}: {attribute}")
     
-    for index, attribute in enumerate (all_attributes):
+    for index, attribute in enumerate (site_responce):
         if attribute.find("_") == 0:
-            all_attributes[index] = " "
+            site_responce[index] = " "
     
-    for index_of_attribute, attribute in enumerate(all_attributes, start = 1):
+    for index_of_attribute, attribute in enumerate(site_responce, start = 1):
         print(f"{index_of_attribute}: {attribute}")
     
     print(20*"_")   
@@ -101,5 +100,25 @@ if __name__=="__main__":
     #         continue
         
     #     value = str(getattr(my_api_request, attribute))
-    #     print(f"{index_of_atribute}: my_api_request().{attribute}: {value}")
+    # 
+    
+if __name__=="__main__":
+       # print(greeting())
+    APISITENAME : str= "https://randomuser.me/api/"
+
+    # Получаю отает от сайта
+    site_responce = my_api_request(APISITENAME)
+    
+    # Вывожу на экран, то что получил от сайта
+    print(site_responce.text)
+    
+    # Вывожу на экран служебную инормацию запроса, т.е. URL сайта
+    print(site_responce.request.url)
+    
+    # Получаю список всех атрибутов полученного запроса
+    all_attributes = dir(site_responce.request)
+    
+    print(type(all_attributes))
+
+    #clear_func_args(all_attributes)    
         
