@@ -12,18 +12,29 @@ Returns:
 """
 
 import datetime
+import os
+import sys
 
 
 import requests as reqs
 
 
+def cls():
+    """Отчищает экран
+    """
+    if sys.platform == "linux" or sys.platform == "linux2":
+        os.system("clear")
+    elif sys.platform == "win32":
+        os.system("cls")
+    else:
+        print("Не могу определить операционную системя для корректной очистки экрана")
+        
+
 def str_to_time_conv(now_time : str):
     """
     Преобразовывает время из строки в формат datetime для корретного сравнения 
-
     Args:
         now_time (str):  Строка в формате 23:00:00 для преобразоывания
-
     Returns:
         datetime : Формат датавремени для корректного сравнения
     """
@@ -35,14 +46,6 @@ def greeting():
     С 6:00 до 12:00 – «Доброе утро»; С 12:00 до 18:00 – «Добрый день»
     С 18:00 до 24:00 – «Добрый вечер»; С 00:00 до 6:00 – «Доброй ночи»
     """
-    # time = datetime.datetime.strptime((datetime.datetime.now().strftime("%H:%M:%S")), "%H:%M:%S").time()
-    # # time = time1.strftime()
-    # if (str_to_time_conv("06:00:00") <= time < str_to_time_conv("12:00:00")): return "Доброе утро"
-    # if (str_to_time_conv("12:00:00") <= time < str_to_time_conv("18:00:00")): return "Добрый день"
-    # if (str_to_time_conv("18:00:00") <= time < str_to_time_conv("23:59:59")): return "Добрый вечер"
-    # if (str_to_time_conv("00:00:00") <= time < str_to_time_conv("06:00:00")): return "Доброй ночи"
-    # else: return str(str_to_time_conv("00:06:00")) #"Фигня какая-то"
-    # # return str(str_to_time_conv("06:00:00"))
     
     time = datetime.datetime.now().hour
     # time = time1.strftime()
@@ -50,7 +53,9 @@ def greeting():
     elif 12 <= time < 18: times_greeting = "Добрый день"
     elif 18 <= time < 23: times_greeting = "Добрый вечер"
     elif 23 <= time < 6: times_greeting = "Доброй ночи"
+    # Добавил дополнительное  значение на всякий случай
     else: times_greeting = "Фигня какая-то "
+    
     return times_greeting
     
 
@@ -69,6 +74,7 @@ def dividing_line_20():
     """Выводит разделительную линию из 20 символов "-"
     """
     print(20*"-")  
+ 
     
 def print_responce_attributs(site_responce):
     """Выводит на экран пронумерованый список  не приматных атрибутов у возвращенного запроса
@@ -114,14 +120,18 @@ def clear_private_arguments(site_responce):
     """
     
     clear_list = [attribute for attribute in site_responce if attribute[0] != "_"]
-    
+
     return clear_list
     
         
 if __name__=="__main__":
-       # print(greeting())
-    APISITENAME : str= "https://randomuser.me/api/"
+    
+    is_cls = input("Очистить экран? (y/n): ")
+    if is_cls.upper() == "Y":
+        cls()
 
+    APISITENAME : str= "https://randomuser.me/api/"
+y
     # Получаю отает от сайта
     site_responce = my_api_request(APISITENAME)
     
@@ -138,10 +148,16 @@ if __name__=="__main__":
 
     dividing_line_20()
     
-    clear_responce = clear_private_arguments(all_attributes)
-    print_responce_attributs(clear_responce)
+    all_clear_attributes = clear_private_arguments(all_attributes)
+    print_responce_attributs(all_clear_attributes)
     # clear_func_args(all_attributes)
     
-    print(callable(site_responce.request.body))
+    dividing_line_20()
+
+    # Вывожу пронумерованый  список не приватных аргументов
+    for index, attribute in enumerate(all_clear_attributes, start=1):
+        # получаем значение атрибута по его имени
+        value = getattr(site_responce.request, attribute)
+        print(f"{index}. {attribute}: {value}")
     
             
