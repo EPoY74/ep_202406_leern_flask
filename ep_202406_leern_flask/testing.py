@@ -131,7 +131,7 @@ if __name__=="__main__":
         cls()
 
     APISITENAME : str= "https://randomuser.me/api/"
-y
+
     # Получаю отает от сайта
     site_responce = my_api_request(APISITENAME)
     
